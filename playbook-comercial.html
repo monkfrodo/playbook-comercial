@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playbook Comercial — Íntegros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+<style>
+:root {
+  --green: #28514D;
+  --green-deep: #1C3B38;
+  --beige: #E0DBC6;
+  --beige-light: #F5F1E8;
+  --gold: #BAA36C;
+  --gold-light: #D4C48E;
+  --olive: #968659;
+  --dark: #1a1a1a;
+  --white: #FAFAF7;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--green-deep);
+  color: var(--beige);
+  padding: 80px 24px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(186,163,108,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(186,163,108,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.hero-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(186,163,108,0.3);
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--beige);
+  margin-bottom: 18px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+.hero p {
+  font-size: 16px;
+  color: rgba(224,219,198,0.7);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+/* ── NAV PILLS ── */
+.nav-strip {
+  background: var(--green);
+  border-bottom: 1px solid rgba(224,219,198,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 24px;
+}
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-link {
+  flex-shrink: 0;
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(224,219,198,0.5);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* ── LAYOUT ── */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── SECTION ── */
+.section {
+  padding: 64px 0;
+  border-bottom: 1px solid rgba(28,59,56,0.08);
+}
+.section:last-of-type { border-bottom: none; }
+
+.section-num {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 400;
+  color: var(--green);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.section-sub {
+  font-size: 15px;
+  color: var(--olive);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* ── CARDS ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+@media (max-width: 640px) {
+  .card-grid { grid-template-columns: 1fr; }
+}
+.card {
+  background: var(--beige-light);
+  border: 1px solid rgba(28,59,56,0.06);
+  border-radius: 12px;
+  padding: 24px;
+}
+.card-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--green);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.card p, .card li {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--dark);
+}
+.card ul {
+  list-style: none;
+  padding: 0;
+}
+.card ul li {
+  padding-left: 16px;
+  position: relative;
+  margin-bottom: 6px;
+}
+.card ul li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ── HIGHLIGHT BOX ── */
+.highlight {
+  background: var(--green);
+  color: var(--beige);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 24px 0;
+}
+.highlight h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+}
+.highlight p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(224,219,198,0.85);
+}
+.highlight strong { color: var(--beige); }
+
+/* ── EXERCISE BOX ── */
+.exercise {
+  background: var(--white);
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 24px 0;
+  position: relative;
+}
+.exercise::before {
+  content: 'EXERCÍCIO';
+  position: absolute;
+  top: -10px;
+  left: 24px;
+  background: var(--green);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 2px 12px;
+  border-radius: 4px;
+}
+.exercise p, .exercise li {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ── FORMULA ── */
+.formula-box {
+  background: var(--green-deep);
+  color: var(--beige);
+  border-radius: 12px;
+  padding: 28px;
+  margin: 24px 0;
+  font-family: 'DM Sans', monospace;
+}
+.formula-box .line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.formula-box .op {
+  color: var(--gold);
+  font-weight: 600;
+  flex-shrink: 0;
+  width: 14px;
+  text-align: center;
+}
+.formula-box .result {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(186,163,108,0.2);
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* ── CALCULATOR ── */
+.calc-wrap {
+  background: var(--beige-light);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 32px 0;
+  border: 1px solid rgba(28,59,56,0.06);
+}
+.calc-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+.calc-sub {
+  font-size: 13px;
+  color: var(--olive);
+  margin-bottom: 28px;
+}
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+@media (max-width: 640px) {
+  .calc-grid { grid-template-columns: 1fr; }
+}
+.input-group {
+  margin-bottom: 20px;
+}
+.input-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+.input-group .hint {
+  font-size: 11px;
+  color: var(--olive);
+  margin-bottom: 4px;
+}
+.input-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid rgba(28,59,56,0.15);
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--green-deep);
+  background: var(--white);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.input-group input:focus {
+  border-color: var(--gold);
+}
+.input-group input::placeholder {
+  color: rgba(28,59,56,0.25);
+  font-weight: 400;
+}
+
+.results-panel {
+  background: var(--green);
+  border-radius: 12px;
+  padding: 24px;
+}
+.results-panel h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(224,219,198,0.1);
+}
+.result-row:last-child { border-bottom: none; }
+.result-label {
+  font-size: 13px;
+  color: rgba(224,219,198,0.7);
+}
+.result-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--beige);
+  font-variant-numeric: tabular-nums;
+}
+.result-unit {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gold);
+  margin-left: 4px;
+}
+
+/* ── LAW BLOCK ── */
+.law {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 20px;
+}
+.law-num {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--green);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.law h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+.law p {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* ── QUAL GRID ── */
+.qual-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.qual-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--green);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.qual-item h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 2px;
+}
+.qual-item p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.55;
+}
+
+/* ── 1:1 MODEL ── */
+.meeting-step {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(28,59,56,0.06);
+}
+.meeting-step:last-child { border-bottom: none; }
+.step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.step-text h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 2px;
+}
+.step-text p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.55;
+}
+
+/* ── QUOTE ── */
+.quote {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--green);
+  text-align: center;
+  padding: 32px 24px;
+  position: relative;
+  line-height: 1.5;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.quote::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0 auto 16px;
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--green-deep);
+  padding: 72px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(186,163,108,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.cta-voucher {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--green-deep);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px 24px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+.cta-section h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(24px, 4vw, 36px);
+  color: var(--beige);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.cta-section p {
+  font-size: 15px;
+  color: rgba(224,219,198,0.65);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--green-deep);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cta-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(186,163,108,0.25);
+}
+.cta-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── ASSESSMENT ── */
+.assess-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+@media (max-width: 640px) { .assess-grid { grid-template-columns: 1fr; } }
+.assess-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--beige-light);
+  border-radius: 10px;
+  border: 1px solid rgba(28,59,56,0.06);
+}
+.assess-item span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--green);
+}
+.assess-dots {
+  display: flex;
+  gap: 6px;
+}
+.assess-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(28,59,56,0.15);
+  background: var(--white);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(28,59,56,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.assess-dot:hover { border-color: var(--gold); color: var(--gold); }
+.assess-dot.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--gold);
+}
+
+/* ── FLOW DIAGRAM ── */
+.flow-row {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+@media (max-width: 640px) { .flow-row { flex-direction: column; } }
+.flow-box {
+  flex: 1;
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.flow-box.green { background: var(--green); color: var(--beige); }
+.flow-box.gold { background: var(--gold); color: var(--green-deep); }
+.flow-box.light { background: var(--beige-light); color: var(--dark); border: 1px solid rgba(28,59,56,0.06); }
+.flow-box h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.flow-box.green h4 { color: var(--gold-light); }
+.flow-box.gold h4 { color: var(--green-deep); }
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--gold);
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+@media (max-width: 640px) { .flow-arrow { justify-content: center; transform: rotate(90deg); } }
+
+/* ── CADENCE TABLE ── */
+.cadence-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(28,59,56,0.08);
+}
+.cadence-table th {
+  background: var(--green);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+}
+.cadence-table td {
+  padding: 12px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(28,59,56,0.06);
+  color: var(--dark);
+}
+.cadence-table tr:last-child td { border-bottom: none; }
+.cadence-table tr:nth-child(even) td { background: var(--beige-light); }
+
+/* ── TRACKER ── */
+.tracker-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin: 16px 0;
+}
+@media (max-width: 640px) { .tracker-grid { grid-template-columns: repeat(3, 1fr); } }
+.tracker-day {
+  background: var(--beige-light);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid rgba(28,59,56,0.06);
+}
+.tracker-day .day-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 8px;
+}
+.tracker-day .day-input {
+  width: 100%;
+  padding: 6px;
+  border: 1.5px solid rgba(28,59,56,0.12);
+  border-radius: 6px;
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-deep);
+  background: var(--white);
+  outline: none;
+}
+.tracker-day .day-input:focus { border-color: var(--gold); }
+
+/* ── DOWNLOAD BTN ── */
+.download-bar {
+  text-align: center;
+  margin-top: 24px;
+}
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green);
+  color: var(--beige);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.download-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(28,59,56,0.2);
+}
+.download-btn svg {
+  width: 16px;
+  height: 16px;
+}
+.download-btn.success {
+  background: var(--gold);
+  color: var(--green-deep);
+}
+
+/* ── FOOTER ── */
+.footer {
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--olive);
+  background: var(--green-deep);
+  border-top: 1px solid rgba(224,219,198,0.06);
+}
+
+/* ── PRINT / PDF ── */
+@media print {
+  .nav-strip, .download-bar, .cta-section, .footer { display: none !important; }
+  .hero { padding: 40px 24px 30px; }
+  .section { padding: 32px 0; break-inside: avoid; }
+  .calc-wrap { break-inside: avoid; }
+  .results-panel { break-inside: avoid; }
+  body { font-size: 12px; }
+}
+
+/* ── TRANSITION QUOTE ── */
+.trans-quote {
+  padding: 0;
+  border-bottom: none !important;
+}
+
+/* ── ANIMATION ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-inner > * {
+  animation: fadeUp 0.6s ease both;
+}
+.hero-badge { animation-delay: 0.1s; }
+.hero h1 { animation-delay: 0.2s; }
+.hero p { animation-delay: 0.35s; }
+
+/* ── EMAIL GATE ── */
+.gate-form {
+  margin-top: 36px;
+  animation: fadeUp 0.6s ease both;
+  animation-delay: 0.5s;
+}
+.gate-lead {
+  font-size: 14px;
+  color: rgba(224,219,198,0.6);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.gate-input-wrap {
+  display: flex;
+  gap: 10px;
+  max-width: 560px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.gate-input-wrap input {
+  flex: 1;
+  min-width: 160px;
+  padding: 14px 18px;
+  border: 1px solid rgba(186,163,108,0.25);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  color: var(--beige);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.gate-input-wrap input::placeholder { color: rgba(224,219,198,0.35); }
+.gate-input-wrap input:focus { border-color: var(--gold); }
+.gate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--gold);
+  color: var(--green-deep);
+  border: none;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+.gate-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+.gate-btn:active { transform: translateY(0); }
+.gate-btn.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+.gate-note {
+  font-size: 12px;
+  color: rgba(224,219,198,0.35);
+  margin-top: 14px;
+}
+.gate-done {
+  margin-top: 28px;
+  animation: fadeUp 0.5s ease both;
+}
+.gate-done p {
+  display: inline-block;
+  padding: 10px 24px;
+  background: rgba(186,163,108,0.15);
+  border: 1px solid rgba(186,163,108,0.3);
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold);
+}
+@media (max-width: 480px) {
+  .gate-input-wrap { flex-direction: column; }
+  .gate-input-wrap input { min-width: 100%; }
+  .gate-btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Íntegros · Playbook Comercial</div>
+    <h1>Estruture seu comercial <em>com sistema</em></h1>
+    <p>Um playbook em 6 etapas para sair do achismo e construir uma operação comercial previsível — sozinho ou com time.</p>
+
+    <!-- ── EMAIL GATE ── -->
+    <div id="gate-form" class="gate-form">
+      <p class="gate-lead">Calculadora de pipeline, autoavaliação, framework de follow-up e mais — tudo prático, zero enrolação.</p>
+      <form id="emailForm" onsubmit="return handleGate(event)">
+        <div class="gate-input-wrap">
+          <input type="text" id="gate-name" placeholder="Seu primeiro nome" required autocomplete="given-name">
+          <input type="email" id="gate-email" placeholder="Seu melhor email" required autocomplete="email">
+          <button type="submit" id="gate-btn" class="gate-btn">
+            <span id="gate-btn-text">Acessar o Playbook</span>
+            <svg id="gate-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+        <p class="gate-note">Sem spam. Você recebe o playbook + 1 email com dica extra. Só.</p>
+      </form>
+    </div>
+
+    <!-- ── ALREADY UNLOCKED ── -->
+    <div id="gate-done" class="gate-done" style="display: none;">
+      <p>✓ Playbook liberado — role pra baixo</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PLAYBOOK CONTENT (hidden until email) ═══════ -->
+<div id="playbook-content" style="display: none; opacity: 0; transition: opacity 0.6s ease;">
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav-strip">
+  <div class="nav-inner">
+    <a href="#diagnostico" class="nav-link">Diagnóstico</a>
+    <a href="#atividade" class="nav-link">Atividade</a>
+    <a href="#calculadora" class="nav-link">Calculadora</a>
+    <a href="#qualificacao" class="nav-link">Qualificação</a>
+    <a href="#gestao" class="nav-link">Gestão</a>
+    <a href="#followup" class="nav-link">Follow-up</a>
+    <a href="#compromisso" class="nav-link">Compromisso</a>
+  </div>
+</nav>
+
+<!-- ═══════ ETAPA 1: DIAGNÓSTICO ═══════ -->
+<section class="section" id="diagnostico">
+  <div class="container">
+    <div class="section-num">Etapa 01</div>
+    <div class="section-title">O diagnóstico real da sua operação</div>
+    <div class="section-sub">Antes de mudar qualquer coisa, você precisa ver o que está acontecendo de verdade.</div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">O que observar</div>
+        <h3>Resultado preso em pessoas</h3>
+        <ul>
+          <li>Se você vende sozinho: o resultado depende do seu humor, da sua energia, do seu dia. Sem processo, cada mês é uma surpresa.</li>
+          <li>Se você tem time: quando poucos carregam o resultado, o sintoma é falta de sistema — não de talento.</li>
+          <li>Em ambos os casos: sem um processo claro, o "sistema" mora na cabeça de alguém — e pode sumir a qualquer momento.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Sinal de alerta</div>
+        <h3>Talento sem processo é risco</h3>
+        <p>Se o resultado depende de "estar num bom dia" — seu ou de alguém do time — você não tem uma operação comercial. Você tem uma aposta. E apostas, por definição, podem não dar certo.</p>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <p><strong>Pergunte — a si mesmo ou ao seu time:</strong></p>
+      <p style="font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--green); margin: 12px 0;">❝ Se eu (ou meu melhor vendedor) tirasse 15 dias de férias amanhã, o que aconteceria com o comercial? ❞</p>
+      <p>Se a resposta é "para tudo" — o diagnóstico está feito.</p>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <div class="section-num">Autoavaliação</div>
+      <p style="font-size: 14px; color: var(--olive); margin-bottom: 4px;">Dê uma nota de 1 a 5 para cada disciplina. Seja honesto — ninguém vai ver isso além de você.</p>
+      <p style="font-size: 12px; color: var(--olive); margin-bottom: 16px;"><strong>1</strong> = não existe &nbsp;|&nbsp; <strong>2</strong> = faço quando lembro &nbsp;|&nbsp; <strong>3</strong> = faço, mas sem consistência &nbsp;|&nbsp; <strong>4</strong> = processo claro &nbsp;|&nbsp; <strong>5</strong> = roda sem mim</p>
+
+      <div class="assess-grid">
+        <div class="assess-item"><span>Prospecção ativa</span><div class="assess-dots" data-assess="prospeccao"><div class="assess-dot" data-v="1">1</div><div class="assess-dot" data-v="2">2</div><div class="assess-dot" data-v="3">3</div><div class="assess-dot" data-v="4">4</div><div class="assess-dot" data-v="5">5</div></div></div>
+        <div class="assess-item"><span>Qualificação de leads</span><div class="assess-dots" data-assess="qualificacao"><div class="assess-dot" data-v="1">1</div><div class="assess-dot" data-v="2">2</div><div class="assess-dot" data-v="3">3</div><div class="assess-dot" data-v="4">4</div><div class="assess-dot" data-v="5">5</div></div></div>
+        <div class="assess-item"><span>Follow-up estruturado</span><div class="assess-dots" data-assess="followup"><div class="assess-dot" data-v="1">1</div><div class="assess-dot" data-v="2">2</div><div class="assess-dot" data-v="3">3</div><div class="assess-dot" data-v="4">4</div><div class="assess-dot" data-v="5">5</div></div></div>
+        <div class="assess-item"><span>Gestão de pipeline</span><div class="assess-dots" data-assess="pipeline"><div class="assess-dot" data-v="1">1</div><div class="assess-dot" data-v="2">2</div><div class="assess-dot" data-v="3">3</div><div class="assess-dot" data-v="4">4</div><div class="assess-dot" data-v="5">5</div></div></div>
+        <div class="assess-item"><span>Processo de proposta</span><div class="assess-dots" data-assess="proposta"><div class="assess-dot" data-v="1">1</div><div class="assess-dot" data-v="2">2</div><div class="assess-dot" data-v="3">3</div><div class="assess-dot" data-v="4">4</div><div class="assess-dot" data-v="5">5</div></div></div>
+        <div class="assess-item"><span>Rotina comercial diária</span><div class="assess-dots" data-assess="rotina"><div class="assess-dot" data-v="1">1</div><div class="assess-dot" data-v="2">2</div><div class="assess-dot" data-v="3">3</div><div class="assess-dot" data-v="4">4</div><div class="assess-dot" data-v="5">5</div></div></div>
+        <div class="assess-item"><span>Revisão semanal</span><div class="assess-dots" data-assess="revisao"><div class="assess-dot" data-v="1">1</div><div class="assess-dot" data-v="2">2</div><div class="assess-dot" data-v="3">3</div><div class="assess-dot" data-v="4">4</div><div class="assess-dot" data-v="5">5</div></div></div>
+        <div class="assess-item"><span>Previsibilidade de receita</span><div class="assess-dots" data-assess="receita"><div class="assess-dot" data-v="1">1</div><div class="assess-dot" data-v="2">2</div><div class="assess-dot" data-v="3">3</div><div class="assess-dot" data-v="4">4</div><div class="assess-dot" data-v="5">5</div></div></div>
+      </div>
+
+      <div class="highlight" id="assess-result" style="display: none;">
+        <h3 id="assess-title">Seu diagnóstico</h3>
+        <p id="assess-text"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section trans-quote">
+  <div class="container">
+    <div class="quote">O que separa quem vende com previsibilidade de quem torce todo mês? Não é tecnologia. Não é motivação. É algo mais simples — e mais difícil de disciplinar.</div>
+  </div>
+</section>
+
+<!-- ═══════ ETAPA 2: ATIVIDADE ═══════ -->
+<section class="section" id="atividade">
+  <div class="container">
+    <div class="section-num">Etapa 02</div>
+    <div class="section-title">Atividade consistente bate talento</div>
+    <div class="section-sub">A fórmula que conecta a meta do mês à atividade de hoje.</div>
+
+    <div class="formula-box">
+      <div class="line"><span class="op"></span> Sua meta mensal (ou do time)</div>
+      <div class="line"><span class="op">÷</span> Ticket médio por contrato</div>
+      <div class="line"><span class="op">=</span> Fechamentos necessários</div>
+      <div class="line"><span class="op">÷</span> Taxa de conversão proposta → contrato</div>
+      <div class="line"><span class="op">=</span> Propostas que precisam sair</div>
+      <div class="line"><span class="op">÷</span> Taxa de qualificação</div>
+      <div class="line result"><span class="op">=</span> Prospects ativos necessários por mês</div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Princípio</div>
+        <h3>Ocupado ≠ produtivo</h3>
+        <p>CRM, reuniões internas, alinhamentos — tudo isso é suporte. Não constrói pipeline. Meça atividade (causa), não só resultado (consequência).</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Na prática</div>
+        <h3>Use a calculadora abaixo</h3>
+        <p>Coloque seus números e veja exatamente quantos contatos, reuniões e propostas são necessários por semana. Sem achismo.</p>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-top: 24px;">
+      <h3>O Bloco de Prospecção</h3>
+      <p>A maioria das pessoas não prospecta porque "não tem tempo". A verdade? Não tem <strong>hora marcada</strong> pra isso. Prospecção que depende de "sobrar tempo" não acontece.</p>
+      <p style="margin-top: 12px;"><strong>A regra:</strong> bloqueie na agenda um horário fixo, todo dia, só pra prospecção. 30 a 60 minutos. Sem exceção. Sem email, sem reunião, sem "só um minutinho". Esse é o bloco mais importante do seu dia — porque é o único que constrói o futuro do pipeline.</p>
+    </div>
+
+    <div class="card-grid" style="margin-top: 20px;">
+      <div class="card">
+        <div class="card-label">O que conta como prospecção</div>
+        <h3>Atividades que constroem pipeline</h3>
+        <ul>
+          <li>Ligar ou mandar mensagem para lead novo</li>
+          <li>Fazer follow-up ativo (não só "checando")</li>
+          <li>Pedir indicação para cliente ativo</li>
+          <li>Comentar ou interagir estrategicamente em rede social</li>
+          <li>Enviar proposta para lead qualificado</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">O que NÃO conta</div>
+        <h3>Atividades que parecem, mas não são</h3>
+        <ul>
+          <li>Atualizar CRM (suporte, não causa)</li>
+          <li>Reunião interna sobre vendas</li>
+          <li>Criar apresentação comercial</li>
+          <li>Pesquisar leads sem contatar</li>
+          <li>Postar conteúdo em rede social (é marketing, não prospecção)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="section-num">Cadência de Prospecção</div>
+      <p style="font-size: 14px; color: var(--olive); margin-bottom: 12px;">Não basta prospectar — precisa ter um ritmo. Aqui está uma cadência que funciona para a maioria dos negócios de serviço:</p>
+
+      <table class="cadence-table">
+        <thead>
+          <tr><th>Dia</th><th>Ação</th><th>Canal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Dia 1</strong></td><td>Primeiro contato — apresentação curta e direta</td><td>WhatsApp, DM ou email</td></tr>
+          <tr><td><strong>Dia 3</strong></td><td>Follow-up com conteúdo de valor (case, dado, artigo)</td><td>Mesmo canal do dia 1</td></tr>
+          <tr><td><strong>Dia 7</strong></td><td>Tentativa de agendar conversa — pergunta específica</td><td>WhatsApp ou ligação</td></tr>
+          <tr><td><strong>Dia 14</strong></td><td>Último follow-up ativo — "faz sentido continuar?"</td><td>Email ou WhatsApp</td></tr>
+          <tr><td><strong>Dia 30+</strong></td><td>Move para nurturing — conteúdo periódico, sem pressão</td><td>Email ou rede social</td></tr>
+        </tbody>
+      </table>
+
+      <div class="exercise">
+        <p><strong>Monte a sua cadência:</strong> Se a tabela acima não encaixa no seu negócio, adapte. O importante é que exista um padrão definido. Sem cadência, cada lead recebe um tratamento diferente — e isso não é personalização, é bagunça.</p>
+      </div>
+    </div>
+
+    <div class="section-num" style="margin-top: 40px;">As 3 Leis do Pipeline</div>
+    <div class="section-sub">Referência: Jeb Blount — Fanatical Prospecting</div>
+
+    <div class="law">
+      <div class="law-num">1</div>
+      <div>
+        <h4>Lei da Substituição</h4>
+        <p>O pipeline esvazia constantemente. 30 leads, taxa de 10%, fecha 1 — sobram 20, não 29. Cada fechamento consome ~10 prospects. Prospecção é reabastecimento diário, não reativo.</p>
+      </div>
+    </div>
+    <div class="law">
+      <div class="law-num">2</div>
+      <div>
+        <h4>Regra dos 30 Dias</h4>
+        <p>Resultado de hoje = prospecção de 30-90 dias atrás. Mês ruim é eco do mês bom anterior. A melhor notícia de outubro plantou a pior surpresa de dezembro.</p>
+      </div>
+    </div>
+    <div class="law">
+      <div class="law-num">3</div>
+      <div>
+        <h4>Lei da Necessidade</h4>
+        <p>Pipeline cheio muda a postura na negociação. Confiança não é traço de personalidade — é consequência estrutural de ter opções.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CALCULADORA ═══════ -->
+<section class="section" id="calculadora" style="background: var(--beige-light);">
+  <div class="container">
+    <div class="section-num">Ferramenta</div>
+    <div class="section-title">Calculadora de Pipeline</div>
+    <div class="section-sub">Coloque seus números reais. Os resultados aparecem automaticamente.</div>
+
+    <div class="calc-wrap" style="background: var(--white);">
+      <div class="calc-grid">
+        <div>
+          <div class="calc-title">Seus dados</div>
+          <div class="calc-sub">Preencha com os números atuais do seu negócio</div>
+
+          <div class="input-group">
+            <label>Meta mensal de novos contratos (R$)</label>
+            <input type="text" id="meta" placeholder="300.000" inputmode="numeric">
+          </div>
+          <div class="input-group">
+            <label>Ticket médio por contrato (R$)</label>
+            <input type="text" id="ticket" placeholder="12.000" inputmode="numeric">
+          </div>
+          <div class="input-group">
+            <label>Taxa: proposta → contrato (%)</label>
+            <input type="text" id="txProposta" placeholder="30" inputmode="numeric">
+          </div>
+          <div class="input-group">
+            <label>Taxa: qualificação → reunião (%)</label>
+            <input type="text" id="txQual" placeholder="50" inputmode="numeric">
+          </div>
+          <div class="input-group">
+            <label>Taxa: prospecção → 1ª reunião (%)</label>
+            <input type="text" id="txProsp" placeholder="20" inputmode="numeric">
+          </div>
+          <div class="input-group">
+            <label>Dias úteis no mês</label>
+            <input type="text" id="dias" placeholder="22" inputmode="numeric">
+          </div>
+        </div>
+
+        <div>
+          <div class="results-panel">
+            <h4>O que você precisa por mês</h4>
+            <div class="result-row">
+              <span class="result-label">Fechamentos</span>
+              <span><span class="result-value" id="r-fechamentos">—</span><span class="result-unit">/mês</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Propostas enviadas</span>
+              <span><span class="result-value" id="r-propostas">—</span><span class="result-unit">/mês</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Prospects qualificados</span>
+              <span><span class="result-value" id="r-prospects">—</span><span class="result-unit">/mês</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Contatos de prospecção</span>
+              <span><span class="result-value" id="r-contatos">—</span><span class="result-unit">/mês</span></span>
+            </div>
+          </div>
+
+          <div class="results-panel" style="margin-top: 16px; background: var(--green-deep);">
+            <h4>Ritmo semanal e diário</h4>
+            <div class="result-row">
+              <span class="result-label">Contatos por semana</span>
+              <span><span class="result-value" id="r-contatosSem">—</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Contatos por dia útil</span>
+              <span><span class="result-value" id="r-contatosDia">—</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Reuniões por semana</span>
+              <span><span class="result-value" id="r-reunioesSem">—</span></span>
+            </div>
+            <div class="result-row">
+              <span class="result-label">Propostas por semana</span>
+              <span><span class="result-value" id="r-propostasSem">—</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="download-bar">
+        <button class="download-btn" id="downloadBtn" onclick="downloadResults()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Baixar meus resultados em PDF
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section trans-quote">
+  <div class="container">
+    <div class="quote">Volume sem critério cria a ilusão de pipeline saudável. Existe uma armadilha do outro lado: alimentar com as coisas erradas.</div>
+  </div>
+</section>
+
+<!-- ═══════ ETAPA 3: QUALIFICAÇÃO ═══════ -->
+<section class="section" id="qualificacao">
+  <div class="container">
+    <div class="section-num">Etapa 03</div>
+    <div class="section-title">Perseguir menos, fechar mais</div>
+    <div class="section-sub">A pergunta certa não é "como convencer?" — é "esse prospect merece meu tempo agora?"</div>
+
+    <div class="highlight">
+      <h3>As 3 perguntas de qualificação</h3>
+      <p>Antes de investir tempo em qualquer lead, passe por este filtro:</p>
+      <div style="margin-top: 16px;">
+        <div class="qual-item" style="margin-bottom: 12px;">
+          <div class="qual-icon" style="background: var(--gold); color: var(--green-deep);">1</div>
+          <div>
+            <h4 style="color: var(--beige);">Tem o problema que meu produto ou serviço resolve?</h4>
+            <p style="color: rgba(224,219,198,0.7);">Se não tem o problema, não existe venda possível — apenas persuasão.</p>
+          </div>
+        </div>
+        <div class="qual-item" style="margin-bottom: 12px;">
+          <div class="qual-icon" style="background: var(--gold); color: var(--green-deep);">2</div>
+          <div>
+            <h4 style="color: var(--beige);">Tem decisão e orçamento para agir?</h4>
+            <p style="color: rgba(224,219,198,0.7);">Sem poder de decisão ou sem budget, a conversa trava em algum momento.</p>
+          </div>
+        </div>
+        <div class="qual-item">
+          <div class="qual-icon" style="background: var(--gold); color: var(--green-deep);">3</div>
+          <div>
+            <h4 style="color: var(--beige);">Tem urgência para resolver agora?</h4>
+            <p style="color: rgba(224,219,198,0.7);">Sem urgência, o lead vira nurturing de longo prazo — não pipeline ativo.</p>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 16px;"><strong>Não passa nas 3?</strong> Nutrir no longo prazo. <strong>Passa?</strong> Pipeline ativo, foco total.</p>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <div class="section-num">Fluxo de Decisão</div>
+      <p style="font-size: 14px; color: var(--olive); margin-bottom: 16px;">Depois de aplicar as 3 perguntas, o que fazer com cada lead?</p>
+
+      <div class="flow-row">
+        <div class="flow-box green">
+          <h4>Passa nas 3 ✓</h4>
+          <p>Pipeline ativo. Prioridade máxima. Agendar próximo passo imediato. Esse lead merece seu melhor tempo e energia.</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box gold">
+          <h4>Ação: proposta ou reunião em até 48h</h4>
+          <p>Não deixe esfriar. Lead quente com urgência é o cenário ideal — trate como tal.</p>
+        </div>
+      </div>
+
+      <div class="flow-row">
+        <div class="flow-box light">
+          <h4>Passa em 2 de 3</h4>
+          <p>Tem potencial, mas falta algo. Geralmente falta urgência ou poder de decisão. Vale investir tempo limitado.</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box light">
+          <h4>Ação: nurturing com prazo</h4>
+          <p>Coloque um lembrete de 15-30 dias. Envie conteúdo relevante. Se em 60 dias não evoluiu, arquive.</p>
+        </div>
+      </div>
+
+      <div class="flow-row">
+        <div class="flow-box light" style="opacity: 0.7;">
+          <h4>Passa em 1 ou nenhuma</h4>
+          <p>Não é hora. Pode ser no futuro, mas agora esse lead consome tempo que deveria ir para quem está pronto.</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box light" style="opacity: 0.7;">
+          <h4>Ação: descarta do pipeline ativo</h4>
+          <p>Move para uma lista fria. Sem remorso. Pipeline limpo = clareza. Pipeline sujo = ilusão.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise" style="margin-top: 24px;">
+      <p><strong>Faça agora (sozinho ou com o time):</strong></p>
+      <ol style="padding-left: 20px; margin: 12px 0;">
+        <li style="margin-bottom: 8px;">Liste seus 5 prospects mais antigos no pipeline</li>
+        <li style="margin-bottom: 8px;">Aplique as 3 perguntas de qualificação para cada um</li>
+        <li style="margin-bottom: 8px;">Classifique cada um: pipeline ativo, nurturing com prazo, ou descarte</li>
+        <li style="margin-bottom: 8px;">Quantos realmente merecem estar no pipeline ativo?</li>
+      </ol>
+      <p style="font-style: italic; color: var(--olive); margin-top: 8px;">Peso morto no pipeline não é preguiça — é falta de critério claro.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section trans-quote">
+  <div class="container">
+    <div class="quote">Disciplina sem sistema dura uma semana. Sistema sem gestão dura um mês. O que dura é quando os dois estão juntos.</div>
+  </div>
+</section>
+
+<!-- ═══════ ETAPA 4: GESTÃO ═══════ -->
+<section class="section" id="gestao">
+  <div class="container">
+    <div class="section-num">Etapa 04</div>
+    <div class="section-title">Gestão do pipeline — com ou sem time</div>
+    <div class="section-sub">Pipeline sem revisão semanal vira lista de desejos. Accountability é o que transforma intenção em ação.</div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Se você vende sozinho</div>
+        <h3>Revisão semanal — 15 minutos com você mesmo</h3>
+        <p style="margin-bottom: 12px;">Sexta-feira. Bloqueia 15 minutos. Sem celular. Responde 3 perguntas:</p>
+        <div style="margin-top: 8px;">
+          <div class="meeting-step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>O que avançou</h4>
+              <p>Quais oportunidades andaram? Quais estagnaram? Por quê?</p>
+            </div>
+          </div>
+          <div class="meeting-step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>Volume de prospecção</h4>
+              <p>Quantos contatos novos fiz essa semana? Está no ritmo da calculadora?</p>
+            </div>
+          </div>
+          <div class="meeting-step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>Próxima semana</h4>
+              <p>Quais são as 3 ações comerciais mais importantes dos próximos 5 dias?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Se você tem time</div>
+        <h3>1:1 semanal — 20 minutos por pessoa</h3>
+        <p style="margin-bottom: 12px;">A mesma estrutura, mas como conversa. Não é cobrança — é clareza.</p>
+        <div style="margin-top: 8px;">
+          <div class="meeting-step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>O que avançou</h4>
+              <p>Quais oportunidades avançaram essa semana?</p>
+            </div>
+          </div>
+          <div class="meeting-step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>O que está travado</h4>
+              <p>Aplique as 3 perguntas de qualificação para cada oportunidade parada.</p>
+            </div>
+          </div>
+          <div class="meeting-step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>Volume de prospecção</h4>
+              <p>Está no ritmo? Se não: o que impediu? Qual o próximo passo concreto?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <h3>Regra de ouro</h3>
+      <p>Sozinho ou com time, o princípio é o mesmo: <strong>clareza e próximo passo</strong>. A revisão não é sobre culpa. É sobre saída.</p>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <div class="section-num">Tracker Semanal</div>
+      <p style="font-size: 14px; color: var(--olive); margin-bottom: 16px;">Anote seus contatos de prospecção diários. No final da semana, compare com a meta da calculadora. Sem anotar, você não sabe se está no ritmo.</p>
+
+      <div class="tracker-grid">
+        <div class="tracker-day"><div class="day-label">Seg</div><input class="day-input" type="text" placeholder="0" inputmode="numeric"></div>
+        <div class="tracker-day"><div class="day-label">Ter</div><input class="day-input" type="text" placeholder="0" inputmode="numeric"></div>
+        <div class="tracker-day"><div class="day-label">Qua</div><input class="day-input" type="text" placeholder="0" inputmode="numeric"></div>
+        <div class="tracker-day"><div class="day-label">Qui</div><input class="day-input" type="text" placeholder="0" inputmode="numeric"></div>
+        <div class="tracker-day"><div class="day-label">Sex</div><input class="day-input" type="text" placeholder="0" inputmode="numeric"></div>
+      </div>
+
+      <div id="tracker-result" style="text-align: center; padding: 16px; background: var(--beige-light); border-radius: 10px; margin-top: 12px; display: none;">
+        <span style="font-size: 13px; color: var(--olive);">Total da semana: </span>
+        <span id="tracker-total" style="font-size: 20px; font-weight: 700; color: var(--green);"></span>
+        <span style="font-size: 13px; color: var(--olive);"> contatos</span>
+      </div>
+
+      <div class="card" style="margin-top: 16px;">
+        <div class="card-label">O que anotar além dos contatos</div>
+        <h3>Checklist de revisão semanal</h3>
+        <ul>
+          <li><strong>Contatos feitos</strong> vs. meta da calculadora — está no ritmo?</li>
+          <li><strong>Reuniões agendadas</strong> — quantas saíram desses contatos?</li>
+          <li><strong>Propostas enviadas</strong> — o pipeline está avançando?</li>
+          <li><strong>Leads descartados</strong> — limpou o pipeline ou acumulou peso morto?</li>
+          <li><strong>Próxima semana</strong> — quais são as 3 prioridades comerciais?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section trans-quote">
+  <div class="container">
+    <div class="quote">A maioria das vendas não é perdida na prospecção. É perdida depois — no silêncio entre um contato e outro.</div>
+  </div>
+</section>
+
+<!-- ═══════ ETAPA 5: FOLLOW-UP ═══════ -->
+<section class="section" id="followup">
+  <div class="container">
+    <div class="section-num">Etapa 05</div>
+    <div class="section-title">Follow-up: onde a maioria desiste</div>
+    <div class="section-sub">80% dos vendedores desistem depois do segundo contato. 80% das vendas acontecem depois do quinto. Faça as contas.</div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">O problema</div>
+        <h3>Por que você não faz follow-up</h3>
+        <ul>
+          <li>"Não quero parecer insistente" — confundir persistência com inconveniência é o erro mais caro do comercial</li>
+          <li>"Se tivesse interesse, teria respondido" — as pessoas estão ocupadas, não desinteressadas</li>
+          <li>"Já mandei proposta, agora é com ele" — proposta enviada sem follow-up é dinheiro jogado no lixo</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">A verdade</div>
+        <h3>Follow-up não é insistência</h3>
+        <p>Insistência é mandar a mesma mensagem 5 vezes. Follow-up é cada contato adicionar algo novo: um caso relevante, um dado que ajuda, uma pergunta que faz pensar. Cada toque precisa <strong>dar</strong> antes de <strong>pedir</strong>.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="section-num">Framework de Follow-up</div>
+      <p style="font-size: 14px; color: var(--olive); margin-bottom: 16px;">Um modelo prático para nunca mais deixar uma oportunidade morrer no silêncio.</p>
+
+      <table class="cadence-table">
+        <thead>
+          <tr><th>Toque</th><th>Quando</th><th>O que fazer</th><th>Exemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1º</strong></td>
+            <td>24h após reunião/proposta</td>
+            <td>Resumo + próximo passo claro</td>
+            <td>"Seguem os pontos que conversamos. O próximo passo seria X — faz sentido pra você?"</td>
+          </tr>
+          <tr>
+            <td><strong>2º</strong></td>
+            <td>3-4 dias depois</td>
+            <td>Conteúdo de valor relacionado</td>
+            <td>"Vi esse caso que tem tudo a ver com o que você me contou sobre [problema específico]"</td>
+          </tr>
+          <tr>
+            <td><strong>3º</strong></td>
+            <td>7-10 dias depois</td>
+            <td>Pergunta específica sobre a decisão</td>
+            <td>"Conseguiu avaliar a proposta? Tem alguma dúvida que eu possa esclarecer?"</td>
+          </tr>
+          <tr>
+            <td><strong>4º</strong></td>
+            <td>14-15 dias depois</td>
+            <td>Dado novo ou gatilho de urgência natural</td>
+            <td>"Só pra te atualizar: a partir do mês que vem [mudança relevante]. Caso queira considerar antes disso..."</td>
+          </tr>
+          <tr>
+            <td><strong>5º</strong></td>
+            <td>21-30 dias depois</td>
+            <td>Fechamento honesto</td>
+            <td>"Quero respeitar seu tempo. Faz sentido continuarmos essa conversa ou o momento não é agora?"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight" style="margin-top: 24px;">
+      <h3>A regra do 5º toque</h3>
+      <p>O 5º toque é libertador — pra você e pro prospect. Se a resposta é "não agora", você ganha clareza e libera energia pro pipeline ativo. Se é "sim, vamos", você quase perdeu uma venda por ter desistido cedo demais. <strong>Nos dois casos, você ganha.</strong></p>
+    </div>
+
+    <div class="exercise" style="margin-top: 24px;">
+      <p><strong>Revise agora:</strong></p>
+      <ol style="padding-left: 20px; margin: 12px 0;">
+        <li style="margin-bottom: 8px;">Abra seu pipeline — quantas propostas enviadas estão sem follow-up?</li>
+        <li style="margin-bottom: 8px;">Para cada uma, qual seria o próximo toque usando o framework acima?</li>
+        <li style="margin-bottom: 8px;">Agende os follow-ups agora. Se ficar pra depois, não acontece.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section trans-quote">
+  <div class="container">
+    <div class="quote">Algumas coisas que merecem sair deste playbook — não como insight, mas como mudança real na operação.</div>
+  </div>
+</section>
+
+<!-- ═══════ ETAPA 6: COMPROMISSO ═══════ -->
+<section class="section" id="compromisso">
+  <div class="container">
+    <div class="section-num">Etapa 06</div>
+    <div class="section-title">O que fica e o que muda</div>
+    <div class="section-sub">Insight sem ação é entretenimento. Vamos mudar isso.</div>
+
+    <div class="card-grid" style="grid-template-columns: 1fr;">
+      <div class="card" style="background: var(--green); border: none;">
+        <div class="card-label" style="color: var(--gold);">3 verdades para fixar</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 12px;">
+          <div>
+            <h3 style="color: var(--gold-light); font-size: 16px;">Sistema bate talento — sempre.</h3>
+            <p style="color: rgba(224,219,198,0.7); font-size: 13px; margin-top: 6px;">Quem tem processo entrega mais do que quem tem só brilhantismo.</p>
+          </div>
+          <div>
+            <h3 style="color: var(--gold-light); font-size: 16px;">Pipeline saudável = atividade diária.</h3>
+            <p style="color: rgba(224,219,198,0.7); font-size: 13px; margin-top: 6px;">Prospectar especialmente quando o pipeline está cheio.</p>
+          </div>
+          <div>
+            <h3 style="color: var(--gold-light); font-size: 16px;">Gestão cria contexto — vendedor executa.</h3>
+            <p style="color: rgba(224,219,198,0.7); font-size: 13px; margin-top: 6px;">Accountability como cultura, não como pressão.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise" style="margin-top: 24px;">
+      <p><strong>Não termine sem preencher:</strong></p>
+      <ol style="padding-left: 20px; margin: 16px 0; line-height: 2;">
+        <li><strong>Uma coisa</strong> que vou implementar essa semana</li>
+        <li><strong>Meta de prospecção</strong> semanal (a sua ou do time)</li>
+        <li><strong>Data da primeira revisão</strong> de pipeline (sexta que vem?)</li>
+      </ol>
+      <p style="font-style: italic; color: var(--olive); margin-top: 12px;">Um sistema construído aos poucos é mais duradouro do que uma mudança radical que dura um mês.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-voucher">R$500 DE DESCONTO</div>
+    <h2>Quer estruturar isso de verdade?</h2>
+    <p>A Fundamentos é um programa de 16 semanas para estruturar negócios de serviço com previsibilidade. Se esse material fez sentido, imagina ter acompanhamento semanal para implementar tudo isso no seu negócio.</p>
+    <a href="https://instagram.com/okevineger" target="_blank" class="cta-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Me chama no Instagram → @okevineger
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  Íntegros · Playbook Comercial · Kevin Eger · integros.org
+</footer>
+
+</div><!-- /playbook-content -->
+
+<!-- ═══════ JAVASCRIPT ═══════ -->
+<script>
+// ══════════════════════════════════════════
+// KIT (ConvertKit) CONFIG — EDITAR AQUI
+// ══════════════════════════════════════════
+const KIT_CONFIG = {
+  formId: '9067445',
+  apiKey: 'ACToNRKxQcIk8S6Brww_QA',
+};
+// Se formId estiver vazio, a gate funciona sem Kit (salva localmente e libera o conteúdo)
+// ══════════════════════════════════════════
+
+function handleGate(e) {
+  e.preventDefault();
+  const name = document.getElementById('gate-name').value.trim();
+  const email = document.getElementById('gate-email').value.trim();
+  const btn = document.getElementById('gate-btn');
+  const btnText = document.getElementById('gate-btn-text');
+
+  if (!name || !email) return false;
+
+  btn.classList.add('loading');
+  btnText.textContent = 'Enviando...';
+
+  if (KIT_CONFIG.formId && KIT_CONFIG.apiKey) {
+    // ── Kit API integration ──
+    fetch('https://api.convertkit.com/v3/forms/' + KIT_CONFIG.formId + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        api_key: KIT_CONFIG.apiKey,
+        email: email,
+        first_name: name,
+        tags: [],
+      })
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.subscription) {
+        unlockPlaybook(name, email);
+      } else {
+        // Fallback: unlock anyway (don't block content over API error)
+        console.warn('Kit API response:', data);
+        unlockPlaybook(name, email);
+      }
+    })
+    .catch(err => {
+      console.warn('Kit API error:', err);
+      // Fallback: unlock anyway
+      unlockPlaybook(name, email);
+    });
+  } else {
+    // ── No Kit configured — just unlock ──
+    console.info('Kit not configured — unlocking without API call');
+    unlockPlaybook(name, email);
+  }
+
+  return false;
+}
+
+function unlockPlaybook(name, email) {
+  // Save to localStorage
+  try {
+    localStorage.setItem('integros_playbook', JSON.stringify({ name, email, ts: Date.now() }));
+  } catch(e) {}
+
+  // Hide gate, show playbook
+  document.getElementById('gate-form').style.display = 'none';
+  document.getElementById('gate-done').style.display = 'block';
+
+  const content = document.getElementById('playbook-content');
+  content.style.display = 'block';
+  requestAnimationFrame(() => {
+    content.style.opacity = '1';
+  });
+
+  // Smooth scroll to first section after a beat
+  setTimeout(() => {
+    document.getElementById('diagnostico').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 600);
+}
+
+// ── Check if already unlocked ──
+(function checkPrevious() {
+  try {
+    const saved = localStorage.getItem('integros_playbook');
+    if (saved) {
+      const data = JSON.parse(saved);
+      if (data.email) {
+        document.getElementById('gate-form').style.display = 'none';
+        document.getElementById('gate-done').style.display = 'block';
+        const content = document.getElementById('playbook-content');
+        content.style.display = 'block';
+        content.style.opacity = '1';
+      }
+    }
+  } catch(e) {}
+})();
+
+(function() {
+  const $ = id => document.getElementById(id);
+
+  function parseNum(val) {
+    if (!val) return NaN;
+    return parseFloat(val.replace(/[^\d.,]/g, '').replace(',', '.'));
+  }
+
+  function calc() {
+    const meta = parseNum($('meta').value);
+    const ticket = parseNum($('ticket').value);
+    const txP = parseNum($('txProposta').value) / 100;
+    const txQ = parseNum($('txQual').value) / 100;
+    const txPr = parseNum($('txProsp').value) / 100;
+    const dias = parseNum($('dias').value);
+
+    const set = (id, v) => {
+      $(id).textContent = isNaN(v) || !isFinite(v) ? '—' : Math.ceil(v).toLocaleString('pt-BR');
+    };
+
+    const fechamentos = meta / ticket;
+    const propostas = fechamentos / txP;
+    const prospects = propostas / txQ;
+    const contatos = prospects / txPr;
+
+    set('r-fechamentos', fechamentos);
+    set('r-propostas', propostas);
+    set('r-prospects', prospects);
+    set('r-contatos', contatos);
+    set('r-contatosSem', contatos / 4);
+    set('r-contatosDia', contatos / dias);
+    set('r-reunioesSem', prospects / 4);
+    set('r-propostasSem', propostas / 4);
+  }
+
+  document.querySelectorAll('.calc-wrap input').forEach(el => {
+    el.addEventListener('input', calc);
+  });
+
+  // Nav active state
+  const sections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ── SELF-ASSESSMENT INTERACTIVITY ──
+  const assessScores = {};
+  document.querySelectorAll('.assess-dots').forEach(group => {
+    const key = group.dataset.assess;
+    group.querySelectorAll('.assess-dot').forEach(dot => {
+      dot.addEventListener('click', function() {
+        const val = parseInt(this.dataset.v);
+        assessScores[key] = val;
+        group.querySelectorAll('.assess-dot').forEach(d => {
+          d.classList.toggle('active', parseInt(d.dataset.v) <= val);
+        });
+        updateAssessResult();
+      });
+    });
+  });
+
+  function updateAssessResult() {
+    const keys = Object.keys(assessScores);
+    if (keys.length < 8) return;
+    const total = Object.values(assessScores).reduce((a, b) => a + b, 0);
+    let resultEl = document.getElementById('assess-result');
+    if (!resultEl) {
+      resultEl = document.createElement('div');
+      resultEl.id = 'assess-result';
+      resultEl.style.cssText = 'margin-top:24px;padding:24px;border-radius:12px;text-align:center;animation:fadeIn 0.4s ease;';
+      const grid = document.querySelector('.assess-grid');
+      grid.parentNode.insertBefore(resultEl, grid.nextSibling);
+    }
+    let level, color, msg;
+    if (total <= 16) {
+      level = 'Operação Reativa';
+      color = '#c0392b';
+      msg = 'Você está vendendo no improviso. Cada etapa deste playbook é uma alavanca — comece pela Atividade (Etapa 02) e construa rotina antes de qualquer outra coisa.';
+    } else if (total <= 28) {
+      level = 'Base em Construção';
+      color = '#BAA36C';
+      msg = 'Tem consciência do que precisa, mas falta consistência. Foque em uma disciplina por vez. Sugestão: comece pela que você deu a menor nota.';
+    } else {
+      level = 'Operação Estruturada';
+      color = 'var(--green)';
+      msg = 'Sua operação tem base. O próximo nível é otimização: melhorar taxas de conversão, encurtar ciclo de venda, e manter a disciplina sob pressão.';
+    }
+    resultEl.style.background = total <= 16 ? '#fdf0ef' : (total <= 28 ? 'var(--beige-light)' : '#eef6f5');
+    resultEl.innerHTML = '<div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:' + color + ';margin-bottom:8px;">' + level + '</div>' +
+      '<div style="font-family:DM Serif Display,serif;font-size:28px;color:' + color + ';margin-bottom:4px;">' + total + '/40</div>' +
+      '<p style="font-size:14px;color:var(--olive);max-width:500px;margin:0 auto;line-height:1.6;">' + msg + '</p>';
+  }
+
+  // ── WEEKLY TRACKER ──
+  document.querySelectorAll('.day-input').forEach(input => {
+    input.addEventListener('input', function() {
+      this.value = this.value.replace(/[^\d]/g, '');
+      updateTracker();
+    });
+  });
+
+  function updateTracker() {
+    const inputs = document.querySelectorAll('.day-input');
+    let total = 0;
+    let filled = 0;
+    inputs.forEach(inp => {
+      const v = parseInt(inp.value);
+      if (!isNaN(v)) { total += v; filled++; }
+    });
+    const resultEl = document.getElementById('tracker-result');
+    const totalEl = document.getElementById('tracker-total');
+    if (filled > 0) {
+      resultEl.style.display = 'block';
+      totalEl.textContent = total;
+      const metaDia = document.getElementById('r-contatosDia').textContent;
+      const metaDiaNum = parseInt(metaDia.replace(/\D/g, ''));
+      if (!isNaN(metaDiaNum) && metaDiaNum > 0) {
+        const metaSemana = metaDiaNum * 5;
+        const pct = Math.round((total / metaSemana) * 100);
+        resultEl.querySelector('span:first-child').innerHTML = 'Total da semana: <strong style="font-size:20px;color:var(--green);">' + total + '</strong> contatos' +
+          (pct > 0 ? ' <span style="font-size:13px;color:var(--olive);">(' + pct + '% da meta semanal)</span>' : '');
+      }
+    }
+  }
+
+  // Download results as PDF
+  window.downloadResults = function() {
+    const btn = $('downloadBtn');
+    const get = id => $(id).textContent;
+
+    if (get('r-fechamentos') === '\u2014') {
+      btn.textContent = '\u26A0 Preencha a calculadora primeiro';
+      btn.classList.add('success');
+      setTimeout(() => {
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Baixar meus resultados em PDF';
+        btn.classList.remove('success');
+      }, 2500);
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const W = 210, H = 297;
+    const GREEN = [40, 81, 77];
+    const GREEN_DEEP = [28, 59, 56];
+    const BEIGE = [224, 219, 198];
+    const GOLD = [186, 163, 108];
+    const WHITE = [250, 250, 247];
+    const DARK = [26, 26, 26];
+
+    // ── HEADER ──
+    doc.setFillColor(...GREEN_DEEP);
+    doc.rect(0, 0, W, 42, 'F');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.setTextColor(...GOLD);
+    doc.text('INTEGROS \u00B7 PLAYBOOK COMERCIAL', W - 20, 14, { align: 'right' });
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(20);
+    doc.setTextColor(...BEIGE);
+    doc.text('Meu Pipeline Comercial', 20, 22);
+
+    doc.setFontSize(9);
+    doc.setTextColor(BEIGE[0], BEIGE[1], BEIGE[2]);
+    doc.text('Gerado em ' + new Date().toLocaleDateString('pt-BR'), 20, 30);
+
+    // Gold accent line
+    doc.setDrawColor(...GOLD);
+    doc.setLineWidth(0.8);
+    doc.line(20, 36, 60, 36);
+
+    let y = 52;
+
+    // ── DADOS INSERIDOS ──
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    doc.setTextColor(...GOLD);
+    doc.text('DADOS INSERIDOS', 20, y);
+    y += 8;
+
+    const inputs = [
+      ['Meta mensal', 'R$ ' + ($('meta').value || '\u2014')],
+      ['Ticket medio', 'R$ ' + ($('ticket').value || '\u2014')],
+      ['Conversao proposta \u2192 contrato', ($('txProposta').value || '\u2014') + '%'],
+      ['Taxa de qualificacao', ($('txQual').value || '\u2014') + '%'],
+      ['Taxa de prospeccao', ($('txProsp').value || '\u2014') + '%'],
+      ['Dias uteis', $('dias').value || '\u2014'],
+    ];
+
+    inputs.forEach(([label, val]) => {
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(80, 80, 80);
+      doc.text(label, 20, y);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(...GREEN);
+      doc.text(val, 100, y, { align: 'right' });
+      doc.setDrawColor(220, 220, 215);
+      doc.setLineWidth(0.2);
+      doc.line(20, y + 2, 100, y + 2);
+      y += 7;
+    });
+
+    // ── RESULTADOS — BOX VERDE ──
+    y += 4;
+    const boxX = 110, boxW = 80, boxH = 52;
+    const boxY = 52;
+
+    doc.setFillColor(...GREEN);
+    doc.roundedRect(boxX, boxY, boxW, boxH, 3, 3, 'F');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    doc.setTextColor(...GOLD);
+    doc.text('O QUE VOCE PRECISA POR MES', boxX + 6, boxY + 8);
+
+    const results = [
+      ['Fechamentos', get('r-fechamentos'), '/mes'],
+      ['Propostas enviadas', get('r-propostas'), '/mes'],
+      ['Prospects qualificados', get('r-prospects'), '/mes'],
+      ['Contatos de prospeccao', get('r-contatos'), '/mes'],
+    ];
+
+    let ry = boxY + 16;
+    results.forEach(([label, val, unit]) => {
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(BEIGE[0], BEIGE[1], BEIGE[2]);
+      doc.text(label, boxX + 6, ry);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(13);
+      doc.text(val, boxX + boxW - 6, ry, { align: 'right' });
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7);
+      doc.setTextColor(...GOLD);
+      doc.text(unit, boxX + boxW - 4, ry, { align: 'left' });
+      ry += 9;
+    });
+
+    // ── RITMO BOX ──
+    const rBoxY = boxY + boxH + 4;
+    const rBoxH = 40;
+    doc.setFillColor(...GREEN_DEEP);
+    doc.roundedRect(boxX, rBoxY, boxW, rBoxH, 3, 3, 'F');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    doc.setTextColor(...GOLD);
+    doc.text('RITMO SEMANAL E DIARIO', boxX + 6, rBoxY + 8);
+
+    const rhythm = [
+      ['Contatos/semana', get('r-contatosSem')],
+      ['Contatos/dia util', get('r-contatosDia')],
+      ['Reunioes/semana', get('r-reunioesSem')],
+      ['Propostas/semana', get('r-propostasSem')],
+    ];
+
+    let rry = rBoxY + 15;
+    rhythm.forEach(([label, val]) => {
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(BEIGE[0], BEIGE[1], BEIGE[2]);
+      doc.text(label, boxX + 6, rry);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.text(val, boxX + boxW - 6, rry, { align: 'right' });
+      rry += 8;
+    });
+
+    // ── SEPARATOR ──
+    y = Math.max(y, rBoxY + rBoxH + 8);
+    y += 4;
+    doc.setDrawColor(220, 220, 215);
+    doc.setLineWidth(0.3);
+    doc.line(20, y, W - 20, y);
+    y += 10;
+
+    // ── 3 LEIS DO PIPELINE ──
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    doc.setTextColor(...GOLD);
+    doc.text('REFERENCIA \u2014 AS 3 LEIS DO PIPELINE', 20, y);
+    y += 10;
+
+    const laws = [
+      ['1', 'Lei da Substituicao', 'O pipeline esvazia constantemente. Cada fechamento consome ~10 prospects. Prospeccao e reabastecimento diario, nao reativo.'],
+      ['2', 'Regra dos 30 Dias', 'Resultado de hoje = prospeccao de 30-90 dias atras. Mes ruim e eco do mes bom anterior.'],
+      ['3', 'Lei da Necessidade', 'Pipeline cheio muda a postura na negociacao. Confianca e consequencia estrutural de ter opcoes.'],
+    ];
+
+    laws.forEach(([num, title, desc]) => {
+      // Number circle
+      doc.setFillColor(...GREEN);
+      doc.roundedRect(20, y - 5, 10, 10, 2, 2, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.setTextColor(...GOLD);
+      doc.text(num, 25, y + 2, { align: 'center' });
+
+      // Title
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(...GREEN);
+      doc.text(title, 34, y);
+
+      // Description
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(80, 80, 80);
+      const lines = doc.splitTextToSize(desc, W - 54);
+      doc.text(lines, 34, y + 5);
+      y += 8 + (lines.length * 4);
+    });
+
+    // ── FOOTER ──
+    doc.setFillColor(...GREEN_DEEP);
+    doc.rect(0, H - 18, W, 18, 'F');
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(BEIGE[0], BEIGE[1], BEIGE[2]);
+    doc.text('Integros \u00B7 Kevin Eger \u00B7 @okevineger \u00B7 integros.org', W / 2, H - 8, { align: 'center' });
+
+    doc.save('meu-pipeline-playbook-integros.pdf');
+
+    btn.innerHTML = '\u2713 PDF salvo!';
+    btn.classList.add('success');
+    setTimeout(() => {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Baixar meus resultados em PDF';
+      btn.classList.remove('success');
+    }, 3000);
+  };
+})();
+</script>
+</body>
+</html>
