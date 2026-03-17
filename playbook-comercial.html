@@ -1570,6 +1570,9 @@ const KIT_CONFIG = {
   formId: '9067445',
   apiKey: 'ACToNRKxQcIk8S6Brww_QA',
 };
+const CRM_CONFIG = {
+  url: 'https://leads.integros.org/api/integrations/playbook?secret=e0d5ad8f62361ad15c88ee3b89e73516fbd943c0ed73ccd01dd4d2d1bc3c35df',
+};
 // Se formId estiver vazio, a gate funciona sem Kit (salva localmente e libera o conteúdo)
 // ══════════════════════════════════════════
 
@@ -1584,6 +1587,15 @@ function handleGate(e) {
 
   btn.classList.add('loading');
   btnText.textContent = 'Enviando...';
+
+  // ── CRM integration (fire and forget) ──
+  if (CRM_CONFIG.url) {
+    fetch(CRM_CONFIG.url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email }),
+    }).catch(err => console.warn('CRM error:', err));
+  }
 
   if (KIT_CONFIG.formId && KIT_CONFIG.apiKey) {
     // ── Kit API integration ──
@@ -1602,18 +1614,15 @@ function handleGate(e) {
       if (data.subscription) {
         unlockPlaybook(name, email);
       } else {
-        // Fallback: unlock anyway (don't block content over API error)
         console.warn('Kit API response:', data);
         unlockPlaybook(name, email);
       }
     })
     .catch(err => {
       console.warn('Kit API error:', err);
-      // Fallback: unlock anyway
       unlockPlaybook(name, email);
     });
   } else {
-    // ── No Kit configured — just unlock ──
     console.info('Kit not configured — unlocking without API call');
     unlockPlaybook(name, email);
   }
