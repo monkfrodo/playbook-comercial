@@ -1,0 +1,37 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: cloudflare-pages-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy playbook-comercial
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Stage public files
+        run: |
+          mkdir -p "$RUNNER_TEMP/site"
+          # Replaces the old vercel.json rewrite "/" -> "/playbook-comercial.html"
+          cp playbook-comercial.html "$RUNNER_TEMP/site/index.html"
+          cp playbook-comercial.html "$RUNNER_TEMP/site/playbook-comercial.html"
+
+      - name: Deploy
+        run: npx --yes wrangler@4 pages deploy "$RUNNER_TEMP/site" --project-name=playbook-comercial --branch=main
